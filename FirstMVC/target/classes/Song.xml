@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Song">
+
+	<resultMap id="result" type="Song">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="lyrics" column="lyrics" />
+	</resultMap>
+
+	<select id="getAll" resultMap="result">
+		SELECT * FROM SONGS ORDER BY ID
+	</select>
+
+	<select id="getById" parameterType="int" resultMap="result">
+		SELECT * FROM SONGS WHERE ID = #{id}
+	</select>
+
+	<select id="getCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM SONGS
+	</select>
+
+	<insert id="insert" parameterType="Song">
+		INSERT INTO SONGS (name, lyrics) values (#{name}, #{lyrics})
+	</insert>
+
+	<update id="update" parameterType="Song" >
+		UPDATE Songs
+		SET
+		name = #{name},
+		lyrics = #{lyrics}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="Song">
+		DELETE from Songs WHERE id = #{id}
+	</delete>
+
+</mapper>
