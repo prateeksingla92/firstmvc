@@ -2,11 +2,18 @@ package com.singla.firstmvc.firstspring;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Song implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int id;
+	
+	@Size(min=1,max=20)
 	private String name;
+	
+	
 	private String lyrics;
 
 	public Song(Song s) {

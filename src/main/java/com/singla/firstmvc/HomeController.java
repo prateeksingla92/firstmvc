@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,7 +96,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String addSong(@RequestBody Song song, ModelMap model) {
+	public String addSong(@RequestBody @Validated Song song, ModelMap model) {
 
 		String msg = "";
 		
@@ -116,7 +117,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String updateSong(@RequestBody Song song,@PathVariable(value = "id") int id, ModelMap model) {
+	public String updateSong(@RequestBody @Validated Song song,@PathVariable(value = "id") int id, ModelMap model) {
 
 		String msg = "";
 		
@@ -159,5 +160,24 @@ public class HomeController {
 
 		return "hello";
 	}
+	
+	@RequestMapping(value = "/count", method = RequestMethod.GET)
+	public String displayCount(ModelMap model) {
+
+		String msg = "";
+		
+		
+		ApplicationContext ctx = new ClassPathXmlApplicationContext(
+				"spring-config.xml");
+		SongService ss = (SongService) ctx.getBean("SongService");
+		
+		msg+= ss.getCount();
+		
+		model.addAttribute ("message", msg);
+
+		return "hello";
+	}
+	
+	
 
 }

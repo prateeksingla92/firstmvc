@@ -9,6 +9,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
                     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
 	<context:annotation-config />
+	<mvc:annotation-driven/>
 	
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -24,7 +25,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="mybatis-config.xml" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
 	</bean>
 
 	<bean id="mapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
